@@ -1,0 +1,35 @@
+load("@bazel_gazelle//:def.bzl", "gazelle")
+
+# gazelle:prefix github.com/adfinitas-app/prometer-hello-world
+
+gazelle(name = "gazelle")
+
+load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
+
+go_binary(
+    name = "main",
+    embed = [":lib"],
+    goos = "linux",
+    goarch = "amd64",
+    visibility = ["//visibility:public"],
+)
+
+go_library(
+    name = "lib",
+    srcs = ["main.go"],
+    importpath = "github.com/adfinitas-app/prometer-hello-world",
+    visibility = ["//visibility:private"],
+    deps = [
+        "@com_github_aws_aws_lambda_go//lambda:go_default_library",
+        "@com_github_aws_aws_sdk_go_v2//aws:go_default_library",
+        "@com_github_aws_aws_sdk_go_v2//aws/external:go_default_library",
+        "@com_github_aws_aws_sdk_go_v2//service/dynamodb:go_default_library",
+    ],
+)
+
+load("@rules_pkg//:pkg.bzl", "pkg_zip")
+
+pkg_zip(
+    name = "pkg",
+    srcs = [":main"],
+)
