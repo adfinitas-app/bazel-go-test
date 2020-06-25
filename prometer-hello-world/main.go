@@ -40,7 +40,7 @@ func HandleRequest(ctx context.Context, name MyEvent) (string, error) {
 
 	fmt.Println("Response", resp)
 
-	return fmt.Sprintf("Hello %s!", name.Name ), nil
+	return fmt.Sprintf("Hello %s!", name.Name), nil
 }
 
 func main() {
