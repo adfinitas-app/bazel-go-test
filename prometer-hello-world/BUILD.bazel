@@ -9,8 +9,6 @@ load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 go_binary(
     name = "bin",
     embed = [":lib"],
-    goos = "linux",
-    goarch = "amd64",
     out = "main",
     visibility = ["//visibility:public"],
 )
