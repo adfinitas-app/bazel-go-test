@@ -7,7 +7,7 @@ gazelle(name = "gazelle")
 load("@io_bazel_rules_go//go:def.bzl", "go_binary", "go_library")
 
 go_binary(
-    name = "bin",
+    name = "lambda_binary",
     embed = [":lib"],
     out = "main",
     visibility = ["//visibility:public"],
@@ -26,9 +26,11 @@ go_library(
     ],
 )
 
-load("@rules_pkg//:pkg.bzl", "pkg_zip")
-
-pkg_zip(
-    name = "pkg",
-    srcs = [":bin"],
+genrule(
+    name = "lambda_deploy",
+    srcs = [":lambda_binary"],
+    outs = ["lambda_deploy.zip"],
+    cmd = "$(location @bazel_tools//tools/zip:zipper) c $@ main=$(SRCS)",
+    tools = ["@bazel_tools//tools/zip:zipper"],
+    visibility = ["//visibility:public"],
 )

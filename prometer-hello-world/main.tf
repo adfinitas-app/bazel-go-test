@@ -22,7 +22,7 @@ resource "aws_iam_role" "lambda_role" {
 }
 
 variable "artifact_path" {
-  default = "../bazel-bin/prometer-hello-world/pkg.zip"
+  default = "../bazel-bin/prometer-hello-world/lambda_deploy.zip"
 }
 
 resource "aws_s3_bucket_object" "artifact" {

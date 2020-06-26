@@ -2,20 +2,6 @@ workspace(name = "prometer")
 
 load("@bazel_tools//tools/build_defs/repo:http.bzl", "http_archive")
 
-RULES_PKG_VERSION = "0.2.5"
-
-RULES_PKG_SHA256 = "352c090cc3d3f9a6b4e676cf42a6047c16824959b438895a76c2989c6d7c246a"
-
-http_archive(
-    name = "rules_pkg",
-    sha256 = RULES_PKG_SHA256,
-    url = "https://github.com/bazelbuild/rules_pkg/releases/download/{v}/rules_pkg-{v}.tar.gz".format(v = RULES_PKG_VERSION),
-)
-
-load("@rules_pkg//:deps.bzl", "rules_pkg_dependencies")
-
-rules_pkg_dependencies()
-
 RULES_GO_VERSION = "0.23.3"
 
 RULES_GO_SHA256 = "a8d6b1b354d371a646d2f7927319974e0f9e52f73a2452d2b3877118169eb6bb"
